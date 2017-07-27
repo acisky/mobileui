@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
+<meta name="format-detection" content="telephone=no, email=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!--<meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">-->
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
+<meta name="msapplication-tap-highlight" content="no">
+<script type="text/javascript" charset="utf-8" src="zepto/zepto.js"></script>
+<script type="text/javascript" charset="utf-8" src="zepto/event.js"></script>
+<script type="text/javascript" charset="utf-8" src="zepto/fx.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+<title></title>
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/demo.css" rel="stylesheet" />
+<link href="css/animate.css" rel="stylesheet" />
+<link href="css/ui-font.css" rel="stylesheet" />
+<link href="src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="src/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+<section class="wrapper">
+	<div class="ui layout">
+		<div class="sidebar">
+			<nav id="sidebar">
+				<dl>
+					<dt>组件</dt>
+					<dd><a href="#grid">基本布局</a></dd>
+					<dd><a href="#text">文本</a></dd>
+					<dd><a href="#table">表格</a></dd>
+					<dd><a href="#button">按钮</a></dd>
+					<dd><a href="#input">输入框</a></dd>
+					<dd><a href="#select">下拉列表</a></dd>
+					<dd><a href="#form">表单</a></dd>
+				</dl>
+				<dl>
+					<dt>其他</dt>
+					<dd><a href="#custom">自定义组件</a></dd>
+					<dd><a href="#responsive">屏幕适配</a></dd>
+					<dd><a href="#animate">Animate</a></dd>
+					<dd><a href="#font">WebFont</a></dd>
+					<dd><a href="#question">常见问题整理</a></dd>
+				</dl>
+			</nav>
+		</div>
+		<div class="row-1 content">
+			<h1>UI组件库说明</h1>
+			<p>标准版组件的主要目的是为了规范重构的代码标准和方便开发人员快速开发和维护，目前的组件包括<span class="ui tag">布局</span> <span class="ui tag">文本</span> <span class="ui tag">表格</span> <span class="ui tag">按钮</span> <span class="ui tag">输入框</span>五大块内容，<span class="ui tag">webfont</span>为可选内容。</p>
+			<p>组件内容均以<span class="ui tag primary">ui</span>作为前缀标示，避免和项目文件冲突，在项目中也可以使用<span class="ui tag primary">:not(.ui)</span>作为区分。</p>
+			<p class="ui notice">该组件目前仅适用于手机移动端开发。</p>
+			<h3 id="grid">基本布局</h3>
+			<p>整体框架布局以上中下为准，基本代码如下</p>
+			<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/&gt;&lt;!--以手机屏幕为标准，禁止放大缩小--&gt;
+&lt;meta name="format-detection" content="telephone=no"/&gt;&lt;!--屏蔽IOS下自动转换数字为手机链接--&gt;
+&lt;meta name="apple-mobile-web-app-capable" content="yes" /&gt;&lt;!--IOS应用模式，自动隐藏默认的工具栏和菜单栏--&gt;
+&lt;meta name="browsermode" content="application"&gt;&lt;!--UC应用模式--&gt;
+&lt;meta name="x5-page-mode" content="app"&gt;&lt;!--腾讯X5浏览器应用模式--&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link href="css/common.css" rel="stylesheet" /&gt;&lt;!--引入标准版组件CSS，并保证在最前面引用--&gt;
+&lt;body&gt;
+&lt;section class="main" data-page="home"&gt;
+	&lt;header class="header"&gt;
+
+	&lt;/header&gt;
+	&lt;article class="artice"&gt;
+
+	&lt;/article&gt;
+	&lt;footer class="header"&gt;
+
+	&lt;/footer&gt;
+&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+			<p>页面分为<span class="ui tag">header</span> <span class="ui tag">article</span> <span class="ui tag">footer</span>三部分，默认为应用模式。<span class="ui tag">section.main</span>作为整体外框架，增加<span class="ui tag">fixed</span>属性即可开启头部底部固定模式。</p>
+			<pre class="prettyprint">&lt;section class="main fixed" data-page="home"&gt;</pre>
+			<h4>自适应布局</h4>
+			<p>栅格系统的配置，组件包含水平和垂直两种方案。</p>
+			<div class="grid_box">
+				<div class="ui layout">
+					<div class="row-1">1</div>
+					<div class="row-2">2</div>
+					<div class="row-3">3</div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui layout"&gt;
+	&lt;div class="row-1"&gt;1&lt;/div&gt;
+	&lt;div class="row-2"&gt;2&lt;/div&gt;
+	&lt;div class="row-3"&gt;3&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>增加<span class="ui tag">vertical</span>属性即可实现垂直布局。</p>
+			<div class="grid_box">
+				<div class="ui layout vertical">
+					<div class="row-1">1</div>
+					<div class="row-2">2</div>
+					<div class="row-3">3</div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui layout vertical"&gt;
+	&lt;div class="row-1"&gt;1&lt;/div&gt;
+	&lt;div class="row-2"&gt;2&lt;/div&gt;
+	&lt;div class="row-3"&gt;3&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p class="ui notice">目前仅支持三栏以下布局，移动端受限于屏幕宽度，三栏以上布局会显得臃肿。</p>
+			<h3 id="text">文本</h3>
+			<p>最基本的文本内容p元素</p>
+			<div class="mobile_screen">
+				<p>For the Greeks, beauty was a virtue: a kind of excellence. Persons then were assumed to be what we now have to call lamely, enviously whole persons. If it did occur to the Greeks to distinguish between a person’s “inside” and “outside”, they still expected that inner beauty would be matched by beauty of the other kind. The well-born young Athenians who gathered around Socrates found it quite paradoxical that their hero was so intelligent, so brave, so honorable, so seductive and so ugly. One of Socrates main pedagogical acts was to be ugly and teach those innocent, no doubt splendid-looking disciples of his how full of paradoxes life really was.</p>
+				<p>对于古希腊人来说，美丽是一种美德：一种出色表现。这样的人在今天会理所当然而又无不受嫉妒地被人们称为"完整"的人。即使古希腊人真的曾经将一个个体的"内在"与"外在"区分开来，他们依然会期望这个个体的内在美能够与他其他方面的美相匹配。当那些出身良好的年轻雅典人聚集在苏格拉底周围时，他们发现了一个非常矛盾的事实：他们的英雄是如此地睿智，如此英勇，如此高贵，如此有诱惑力——而且，如此其貌不扬。苏格拉底用自己的丑陋给他的那些天真无邪的，无疑也是非常俊美的始徒们上的其中最重要的一节课就是：生活中充满了矛盾。</p>
+			</div>
+			<pre class="prettyprint">
+&lt;p&gt;For the Greeks, beauty was a virtue: a kind of excellence. Persons then were assumed to be what we now have to call lamely, enviously whole persons. If it did occur to the Greeks to distinguish between a person’s “inside” and “outside”, they still expected that inner beauty would be matched by beauty of the other kind. The well-born young Athenians who gathered around Socrates found it quite paradoxical that their hero was so intelligent, so brave, so honorable, so seductive and so ugly. One of Socrates main pedagogical acts was to be ugly and teach those innocent, no doubt splendid-looking disciples of his how full of paradoxes life really was.&lt;/p&gt;
+&lt;p&gt;对于古希腊人来说，美丽是一种美德：一种出色表现。这样的人在今天会理所当然而又无不受嫉妒地被人们称为"完整"的人。即使古希腊人真的曾经将一个个体的"内在"与"外在"区分开来，他们依然会期望这个个体的内在美能够与他其他方面的美相匹配。当那些出身良好的年轻雅典人聚集在苏格拉底周围时，他们发现了一个非常矛盾的事实：他们的英雄是如此地睿智，如此英勇，如此高贵，如此有诱惑力——而且，如此其貌不扬。苏格拉底用自己的丑陋给他的那些天真无邪的，无疑也是非常俊美的始徒们上的其中最重要的一节课就是：生活中充满了矛盾。&lt;/p&gt;</pre>
+			<h4>文本对齐</h4>
+			<p>文本对齐通用样式<span class="ui tag">text-left</span> <span class="ui tag">text-right</span> <span class="ui tag">text-center</span></p>
+			<p class="text-left">文字靠左对齐</p>
+			<p class="text-right">文字靠右对齐</p>
+			<p class="text-center">文字居中对齐</p>
+			<pre class="prettyprint">
+&lt;p class="text-left"&gt;文字靠左对齐&lt;/p&gt;
+&lt;p class="text-right"&gt;文字靠右对齐&lt;/p&gt;
+&lt;p class="text-center"&gt;文字居中对齐&lt;/p&gt;</pre>
+			<h4>圆角</h4>
+			<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQ/SURBVHhe7dYxEQAhEARB/Gs7T2AACCbu4A1cLdO/Zmb73MAG7htYDuNx2MB7Ax4IQf1BfDbggXggHogH4jfKb1TbAEEIQhCCtHqorrsRhCAEIYgS0rBtgCAEIQhBWj1U190IQhCCEEQJadg2QBCCEIQgrR6q624EIQhBCKKENGwbIAhBCEKQVg/VdTeCEIQgBFFCGrYNEIQgBCFIq4fquhtBCEIQgighDdsGCEIQghCk1UN13Y0gBCEIQZSQhm0DBCEIQQjS6qG67kYQghCEIEpIw7YBghCEIARp9VBddyMIQQhCECWkYdsAQQhCEIK0eqiuuxGEIAQhiBLSsG2AIAQhCEFaPVTX3QhCEIIQRAlp2DZAEIIQhCCtHqrrbgQhCEEIooQ0bBsgCEEIQpBWD9V1N4IQhCAEUUIatg0QhCAEIUirh+q6G0EIQhCCKCEN2wYIQhCCEKTVQ3XdjSAEIQhBlJCGbQMEIQhBCNLqobruRhCCEIQgSkjDtgGCEIQgBGn1UF13IwhBCEIQJaRh2wBBCEIQgrR6qK67EYQgBCGIEtKwbYAgBCEIQVo9VNfdCEIQghBECWnYNkAQghCEIK0equtuBCEIQQiihDRsGyAIQQhCkFYP1XU3ghCEIARRQhq2DRCEIAQhSKuH6robQQhCEIIoIQ3bBghCEIIQpNVDdd2NIAQhCEGUkIZtAwQhCEEI0uqhuu5GEIIQhCBKSMO2AYIQhCAEafVQXXcjCEEIQhAlpGHbAEEIQhCCtHqorrsRhCAEIYgS0rBtgCAEIQhBWj1U190IQhCCEEQJadg2QBCCEIQgrR6q624EIQhBCKKENGwbIAhBCEKQVg/VdTeCEIQgBFFCGrYNEIQgBCFIq4fquhtBCEIQgighDdsGCEIQghCk1UN13Y0gBCEIQZSQhm0DBCEIQQjS6qG67kYQghCEIEpIw7YBghCEIARp9VBddyMIQQhCECWkYdsAQQhCEIK0eqiuuxGEIAQhiBLSsG2AIAQhCEFaPVTX3QhCEIIQRAlp2DZAEIIQhCCtHqrrbgQhCEEIooQ0bBsgCEEIQpBWD9V1N4IQhCAEUUIatg0QhCAEIUirh+q6G0EIQhCCKCEN2wYIQhCCEKTVQ3XdjSAEIQhBlJCGbQMEIQhBCNLqobruRhCCEIQgSkjDtgGCEIQgBGn1UF13IwhBCEIQJaRh2wBBCEIQgrR6qK67EYQgBCGIEtKwbYAgBCEIQVo9VNfdCEIQghBECWnYNkAQghCEIK0equtuBCEIQQiihDRsGyAIQQhCkFYP1XU3ghCEIARRQhq2DRCEIAQhSKuH6robQQhCEIIoIQ3bBghCEIIQpNVDdd2NIAQhCEGUkIZtAwQhCEEI0uqhuu5GEIIQhCBKSMO2AYIQhCAEafVQXXcjCEEIQhAlpGHbAEEIQhCCtHqorrsRhCAE+WzgAGknS8B9EtfxAAAAAElFTkSuQmCC" class="rounded" /> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQ/SURBVHhe7dYxEQAhEARB/Gs7T2AACCbu4A1cLdO/Zmb73MAG7htYDuNx2MB7Ax4IQf1BfDbggXggHogH4jfKb1TbAEEIQhCCtHqorrsRhCAEIYgS0rBtgCAEIQhBWj1U190IQhCCEEQJadg2QBCCEIQgrR6q624EIQhBCKKENGwbIAhBCEKQVg/VdTeCEIQgBFFCGrYNEIQgBCFIq4fquhtBCEIQgighDdsGCEIQghCk1UN13Y0gBCEIQZSQhm0DBCEIQQjS6qG67kYQghCEIEpIw7YBghCEIARp9VBddyMIQQhCECWkYdsAQQhCEIK0eqiuuxGEIAQhiBLSsG2AIAQhCEFaPVTX3QhCEIIQRAlp2DZAEIIQhCCtHqrrbgQhCEEIooQ0bBsgCEEIQpBWD9V1N4IQhCAEUUIatg0QhCAEIUirh+q6G0EIQhCCKCEN2wYIQhCCEKTVQ3XdjSAEIQhBlJCGbQMEIQhBCNLqobruRhCCEIQgSkjDtgGCEIQgBGn1UF13IwhBCEIQJaRh2wBBCEIQgrR6qK67EYQgBCGIEtKwbYAgBCEIQVo9VNfdCEIQghBECWnYNkAQghCEIK0equtuBCEIQQiihDRsGyAIQQhCkFYP1XU3ghCEIARRQhq2DRCEIAQhSKuH6robQQhCEIIoIQ3bBghCEIIQpNVDdd2NIAQhCEGUkIZtAwQhCEEI0uqhuu5GEIIQhCBKSMO2AYIQhCAEafVQXXcjCEEIQhAlpGHbAEEIQhCCtHqorrsRhCAEIYgS0rBtgCAEIQhBWj1U190IQhCCEEQJadg2QBCCEIQgrR6q624EIQhBCKKENGwbIAhBCEKQVg/VdTeCEIQgBFFCGrYNEIQgBCFIq4fquhtBCEIQgighDdsGCEIQghCk1UN13Y0gBCEIQZSQhm0DBCEIQQjS6qG67kYQghCEIEpIw7YBghCEIARp9VBddyMIQQhCECWkYdsAQQhCEIK0eqiuuxGEIAQhiBLSsG2AIAQhCEFaPVTX3QhCEIIQRAlp2DZAEIIQhCCtHqrrbgQhCEEIooQ0bBsgCEEIQpBWD9V1N4IQhCAEUUIatg0QhCAEIUirh+q6G0EIQhCCKCEN2wYIQhCCEKTVQ3XdjSAEIQhBlJCGbQMEIQhBCNLqobruRhCCEIQgSkjDtgGCEIQgBGn1UF13IwhBCEIQJaRh2wBBCEIQgrR6qK67EYQgBCGIEtKwbYAgBCEIQVo9VNfdCEIQghBECWnYNkAQghCEIK0equtuBCEIQQiihDRsGyAIQQhCkFYP1XU3ghCEIARRQhq2DRCEIAQhSKuH6robQQhCEIIoIQ3bBghCEIIQpNVDdd2NIAQhCEGUkIZtAwQhCEEI0uqhuu5GEIIQhCBKSMO2AYIQhCAEafVQXXcjCEEIQhAlpGHbAEEIQhCCtHqorrsRhCAE+WzgAGknS8B9EtfxAAAAAElFTkSuQmCC" class="circle" /></p>
+			<pre class="prettyprint">
+&lt;img src="" class="rounded" /&gt;
+&lt;img src="" class="circle" /&gt;</pre>
+			<h4>提示文本</h4>
+			<p>定义通用提示文本</p>
+			<p class="ui notice">normal notes</p>
+			<p class="ui notice success">success notes</p>
+			<p class="ui notice warning">warning notes</p>
+			<p class="ui notice danger">danger notes</p>
+			<pre class="prettyprint">
+&lt;p class="ui notice"&gt;normal notes&lt;/p&gt;
+&lt;p class="ui notice success"&gt;success notes&lt;/p&gt;
+&lt;p class="ui notice warning"&gt;warning notes&lt;/p&gt;
+&lt;p class="ui notice danger"&gt;danger notes&lt;/p&gt;</pre>
+			<h4>文本标签</h4>
+			<p><span class="ui tag">javascript</span> <span class="ui tag primary">HTML5</span> <span class="ui tag rounded">javascript</span></p>
+			<pre class="prettyprint">
+&lt;span class="ui tag"&gt;javascript&lt;/span&gt;
+&lt;span class="ui tag primary"&gt;HTML5&lt;/span&gt;
+&lt;span class="ui tag rounded"&gt;javascript&lt;/span&gt;</pre>
+			<h3 id="table">表格</h3>
+			<p>最基本的表格形式,可定义边框、圆角、背景色。默认只有下边框。</p>
+			<table class="ui table">
+		        <tr>
+		          <th>Name</th>
+		          <th>Registration Date</th>
+		          <th>E-mail address</th>
+		          <th>Premium Plan</th>
+		        </tr>
+		        <tr>
+		          <td>John Lilki</td>
+		          <td>September 14, 2013</td>
+		          <td>jhlilk22@yahoo.com</td>
+		          <td>No</td>
+		        </tr>
+		        <tr>
+		          <td>Jamie Harington</td>
+		          <td>January 11, 2014</td>
+		          <td>jamieharingonton@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		        <tr>
+		          <td>Jill Lewis</td>
+		          <td>May 11, 2014</td>
+		          <td>jilsewris22@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		    </table>
+			<pre class="prettyprint">
+&lt;table class="ui table"&gt;
+	&lt;tr&gt;
+	  &lt;th&gt;Name&lt;/th&gt;
+	  &lt;th&gt;Registration Date&lt;/th&gt;
+	  &lt;th&gt;E-mail address&lt;/th&gt;
+	  &lt;th&gt;Premium Plan&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;John Lilki&lt;/td&gt;
+	  &lt;td&gt;September 14, 2013&lt;/td&gt;
+	  &lt;td&gt;jhlilk22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;No&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jamie Harington&lt;/td&gt;
+	  &lt;td&gt;January 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jamieharingonton@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jill Lewis&lt;/td&gt;
+	  &lt;td&gt;May 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jilsewris22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;</pre>
+			<h4>全边框表格</h4>
+			<table class="ui table border">
+		        <tr>
+		          <th>Name</th>
+		          <th>Registration Date</th>
+		          <th>E-mail address</th>
+		          <th>Premium Plan</th>
+		        </tr>
+		        <tr>
+		          <td>John Lilki</td>
+		          <td>September 14, 2013</td>
+		          <td>jhlilk22@yahoo.com</td>
+		          <td>No</td>
+		        </tr>
+		        <tr>
+		          <td>Jamie Harington</td>
+		          <td>January 11, 2014</td>
+		          <td>jamieharingonton@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		        <tr>
+		          <td>Jill Lewis</td>
+		          <td>May 11, 2014</td>
+		          <td>jilsewris22@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		    </table>
+			<pre class="prettyprint">
+&lt;table class="ui table border"&gt;
+	&lt;tr&gt;
+	  &lt;th&gt;Name&lt;/th&gt;
+	  &lt;th&gt;Registration Date&lt;/th&gt;
+	  &lt;th&gt;E-mail address&lt;/th&gt;
+	  &lt;th&gt;Premium Plan&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;John Lilki&lt;/td&gt;
+	  &lt;td&gt;September 14, 2013&lt;/td&gt;
+	  &lt;td&gt;jhlilk22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;No&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jamie Harington&lt;/td&gt;
+	  &lt;td&gt;January 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jamieharingonton@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jill Lewis&lt;/td&gt;
+	  &lt;td&gt;May 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jilsewris22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;</pre>
+			<h4>圆角全边框表格</h4>
+			<table class="ui table rounded">
+		        <tr>
+		          <th>Name</th>
+		          <th>Registration Date</th>
+		          <th>E-mail address</th>
+		          <th>Premium Plan</th>
+		        </tr>
+		        <tr>
+		          <td>John Lilki</td>
+		          <td>September 14, 2013</td>
+		          <td>jhlilk22@yahoo.com</td>
+		          <td>No</td>
+		        </tr>
+		        <tr>
+		          <td>Jamie Harington</td>
+		          <td>January 11, 2014</td>
+		          <td>jamieharingonton@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		        <tr>
+		          <td>Jill Lewis</td>
+		          <td>May 11, 2014</td>
+		          <td>jilsewris22@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		    </table>
+			<pre class="prettyprint">
+&lt;table class="ui table rounded"&gt;
+	&lt;tr&gt;
+	  &lt;th&gt;Name&lt;/th&gt;
+	  &lt;th&gt;Registration Date&lt;/th&gt;
+	  &lt;th&gt;E-mail address&lt;/th&gt;
+	  &lt;th&gt;Premium Plan&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;John Lilki&lt;/td&gt;
+	  &lt;td&gt;September 14, 2013&lt;/td&gt;
+	  &lt;td&gt;jhlilk22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;No&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jamie Harington&lt;/td&gt;
+	  &lt;td&gt;January 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jamieharingonton@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td&gt;Jill Lewis&lt;/td&gt;
+	  &lt;td&gt;May 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jilsewris22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;</pre>
+			<h4>表格背景</h4>
+			<p>为单行或者单个表格框增加背景色，包含<span class="ui tag">info</span> <span class="ui tag">active</span> <span class="ui tag">success</span> <span class="ui tag">warning</span> <span class="ui tag">danger</span></p>
+			<table class="ui table">
+		        <tr class="info">
+		          <th>Name</th>
+		          <th>Registration Date</th>
+		          <th>E-mail address</th>
+		          <th>Premium Plan</th>
+		        </tr>
+		        <tr>
+		          <td class="active">John Lilki</td>
+		          <td>September 14, 2013</td>
+		          <td>jhlilk22@yahoo.com</td>
+		          <td>No</td>
+		        </tr>
+		        <tr>
+		          <td class="success">Jamie Harington</td>
+		          <td>January 11, 2014</td>
+		          <td>jamieharingonton@yahoo.com</td>
+		          <td>Yes</td>
+		        </tr>
+		        <tr>
+		          <td class="warning">Jill Lewis</td>
+		          <td>May 11, 2014</td>
+		          <td>jilsewris22@yahoo.com</td>
+		          <td class="danger">Yes</td>
+		        </tr>
+		    </table>
+		    <pre class="prettyprint">
+&lt;table class="ui table"&gt;
+	&lt;tr class="info"&gt;
+	  &lt;th&gt;Name&lt;/th&gt;
+	  &lt;th&gt;Registration Date&lt;/th&gt;
+	  &lt;th&gt;E-mail address&lt;/th&gt;
+	  &lt;th&gt;Premium Plan&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td class="active"&gt;John Lilki&lt;/td&gt;
+	  &lt;td&gt;September 14, 2013&lt;/td&gt;
+	  &lt;td&gt;jhlilk22@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;No&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td class="success"&gt;Jamie Harington&lt;/td&gt;
+	  &lt;td&gt;January 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jamieharingonton@yahoo.com&lt;/td&gt;
+	  &lt;td&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+	  &lt;td class="warning"&gt;Jill Lewis&lt;/td&gt;
+	  &lt;td&gt;May 11, 2014&lt;/td&gt;
+	  &lt;td&gt;jilsewris22@yahoo.com&lt;/td&gt;
+	  &lt;td class="danger"&gt;Yes&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;</pre>
+			<p>内容过多的在外层可以放在<span class="ui tag">table-responsive</span>里实现自动滚动</p>
+			<div class="ui table-responsive">
+				<table class="ui table border">
+			        <tr>
+			          <th>Name</th>
+			          <th>Registration Date</th>
+			          <th>E-mail address</th>
+			          <th>Premium Plan</th>
+			        </tr>
+			        <tr>
+			          <td>John Lilki</td>
+			          <td>September 14, 2013</td>
+			          <td>jhlilk22@yahoo.com</td>
+			          <td>No</td>
+			        </tr>
+			        <tr>
+			          <td>Jamie Harington</td>
+			          <td>January 11, 2014</td>
+			          <td>jamieharingonton@yahoo.com</td>
+			          <td>Yes</td>
+			        </tr>
+			        <tr>
+			          <td>Jill Lewis</td>
+			          <td>May 11, 2014</td>
+			          <td>jilsewris22@yahoo.com</td>
+			          <td>Yes</td>
+			        </tr>
+			    </table>
+		    </div>
+		    <pre class="prettyprint">
+&lt;div class="ui table-responsive"&gt;
+	&lt;table class="ui table border"&gt;
+		&lt;tr&gt;
+		  &lt;th&gt;Name&lt;/th&gt;
+		  &lt;th&gt;Registration Date&lt;/th&gt;
+		  &lt;th&gt;E-mail address&lt;/th&gt;
+		  &lt;th&gt;Premium Plan&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+		  &lt;td&gt;John Lilki&lt;/td&gt;
+		  &lt;td&gt;September 14, 2013&lt;/td&gt;
+		  &lt;td&gt;jhlilk22@yahoo.com&lt;/td&gt;
+		  &lt;td&gt;No&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+		  &lt;td&gt;Jamie Harington&lt;/td&gt;
+		  &lt;td&gt;January 11, 2014&lt;/td&gt;
+		  &lt;td&gt;jamieharingonton@yahoo.com&lt;/td&gt;
+		  &lt;td&gt;Yes&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+		  &lt;td&gt;Jill Lewis&lt;/td&gt;
+		  &lt;td&gt;May 11, 2014&lt;/td&gt;
+		  &lt;td&gt;jilsewris22@yahoo.com&lt;/td&gt;
+		  &lt;td&gt;Yes&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</pre>
+			<h3 id="button">按钮</h3>
+			<p>基本的按钮，可以修改大小、颜色</p>
+			<p>
+				<a href="#" class="ui button tiny">tiny</a>
+				<a href="#" class="ui button small">small</a>
+				<a href="#" class="ui button">default</a>
+				<a href="#" class="ui button large">large</a>
+			</p>
+			<pre class="prettyprint">
+&lt;a href="#" class="ui button tiny"&gt;tiny&lt;/a&gt;
+&lt;a href="#" class="ui button small"&gt;small&lt;/a&gt;
+&lt;a href="#" class="ui button"&gt;default&lt;/a&gt;
+&lt;a href="#" class="ui button large"&gt;large&lt;/a&gt;</pre>
+			<p>
+				<a href="#" class="ui button active">active</a>
+				<a href="#" class="ui button disabled">disabled</a>
+				<a href="#" class="ui button primary">primary</a>
+			</p>
+			<pre class="prettyprint">
+&lt;a href="#" class="ui button active"&gt;active&lt;/a&gt;
+&lt;a href="#" class="ui button disabled"&gt;disabled&lt;/a&gt;
+&lt;a href="#" class="ui button primary"&gt;primary&lt;/a&gt;</pre>
+			<p>
+				<a href="#" class="ui button success">success</a>
+				<a href="#" class="ui button error">error</a>
+				<a href="#" class="ui button warning">warning</a>
+				<a href="#" class="ui button secondary">secondary</a>
+			</p>
+			<pre class="prettyprint">
+&lt;a href="#" class="ui button success"&gt;success&lt;/a&gt;
+&lt;a href="#" class="ui button error"&gt;error&lt;/a&gt;
+&lt;a href="#" class="ui button warning"&gt;warning&lt;/a&gt;
+&lt;a href="#" class="ui button secondary"&gt;secondary&lt;/a&gt;</pre>
+			<p>增加<span class="ui tag">block</span> <span class="ui tag">border</span> <span class="ui tag">rounded</span>实现全屏、边框、圆角样式。</p>
+			<p><a href="#" class="ui button block">button</a></p>
+			<p><a href="#" class="ui button block border rounded">button</a></p>
+			<pre class="prettyprint">
+&lt;a href="#" class="ui button block"&gt;button&lt;/a&gt;
+&lt;a href="#" class="ui button block border rounded"&gt;button&lt;/a&gt;</pre>
+			<h4>多按钮</h4>
+			<p>多个按钮并排</p>
+			<div class="ui buttons">
+				<a href="#" class="ui button block rounded"><i class="fa fa-adn"></i>default</a>
+				<a href="#" class="ui button block rounded"><i class="fa fa-adn"></i>default</a>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui buttons"&gt;
+	&lt;a href="#" class="ui button block rounded"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block rounded"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+&lt;/div&gt;</pre>
+			<h4>切换按钮组</h4>
+			<p>多个按钮成组横排或竖排</p>
+			<div class="grid">
+				<div class="ui button-group border">
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui button-group border"&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+&lt;/div&gt;</pre>
+			<div class="grid">
+				<div class="ui button-group border rounded">
+					<a href="#" class="ui button small block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button small block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button small block"><i class="fa fa-adn"></i>default</a>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui button-group border rounded"&gt;
+	&lt;a href="#" class="ui button small block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button small block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button small block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+&lt;/div&gt;</pre>
+			<div class="grid">
+				<div class="ui button-list border">
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui button-list border"&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+&lt;/div&gt;</pre>
+			<div class="grid">
+				<div class="ui button-list border rounded">
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+					<a href="#" class="ui button block"><i class="fa fa-adn"></i>default</a>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui button-list border rounded"&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+	&lt;a href="#" class="ui button block"&gt;&lt;i class="fa fa-adn"&gt;&lt;/i&gt;default&lt;/a&gt;
+&lt;/div&gt;</pre>
+			<h3 id="input">输入框</h3>
+			<p>常见input类型，包括<span class="ui tag">text</span> <span class="ui tag">checkbox</span> <span class="ui tag">radio</span></p>
+			<div class="ui field">
+				<input type="text" class="ui input" placeholder="Input text" />
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>带边框的输入框</p>
+			<div class="ui field border">
+				<input type="text" class="ui input" placeholder="Input text" />
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>圆角带边框的输入框</p>
+			<div class="ui field border rounded">
+				<input type="text" class="ui input" placeholder="Input text" />
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border rounded"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>透明输入框</p>
+			<div class="ui field border transparent">
+				<input type="text" class="ui input" placeholder="Input text" />
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border transparent"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>输入框包含两种状态<span class="ui tag">disable</span> <span class="ui tag">readonly</span></p>
+			<div class="grid">
+				<div class="ui field border rounded">
+					<input type="text" class="ui input" placeholder="disabled" disabled="disabled" />
+				</div>
+			</div>
+			<div class="grid">
+				<div class="ui field border rounded">
+					<input type="text" class="ui input" placeholder="readonly" readonly="readonly" />
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border rounded"&gt;
+	&lt;input type="text" class="ui input" placeholder="disabled" disabled="disabled" /&gt;
+&lt;/div&gt;
+&lt;div class="ui field border rounded"&gt;
+	&lt;input type="text" class="ui input" placeholder="readonly" readonly="readonly" /&gt;
+&lt;/div&gt;</pre>
+			<p>错误提示</p>
+			<div class="grid">
+				<div class="ui field error">
+					<input type="text" class="ui input" placeholder="Input text" />
+				</div>
+			</div>
+			<div class="grid">
+				<div class="ui field border rounded error">
+					<input type="text" class="ui input" placeholder="Input text" />
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field error"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;
+&lt;div class="ui field border rounded error"&gt;
+	&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>带提示文字的输入框，提示文字放在<span class="ui tag">ui label</span>内。</p>
+			<div class="grid">
+				<div class="ui field text">
+					<div class="ui label">Username</div><input type="text" class="ui input" placeholder="Input text" />
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="grid"&gt;
+	&lt;div class="ui field text"&gt;
+		&lt;div class="ui label"&gt;Username&lt;/div&gt;&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>提示文字也支持边框和圆角</p>
+			<div class="grid">
+				<div class="ui field border text">
+					<div class="ui label">Username</div><input type="text" class="ui input" placeholder="Input text" />
+				</div>
+			</div>
+			<div class="grid">
+				<div class="ui field border rounded text">
+					<div class="ui label">Username</div><input type="text" class="ui input" placeholder="Input text" />
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border text"&gt;
+	&lt;div class="ui label"&gt;Username&lt;/div&gt;&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;
+&lt;div class="ui field border rounded text"&gt;
+	&lt;div class="ui label"&gt;Username&lt;/div&gt;&lt;input type="text" class="ui input" placeholder="Input text" /&gt;
+&lt;/div&gt;</pre>
+			<p>部分项目用到模拟输入框，使用动画效果实现输入提示</p>
+			<div class="grid">
+				<div class="ui field text border rounded">
+					<div class="ui label">Username</div><div class="ui input" date-placeholder="Input text"></div>
+				</div>
+			</div>
+			<div class="grid">
+				<div class="ui field text border rounded">
+					<div class="ui label">Username</div><div class="ui input active" date-placeholder="Input text"></div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="grid"&gt;
+	&lt;div class="ui field text border rounded"&gt;
+		&lt;div class="ui label"&gt;Username&lt;/div&gt;&lt;div class="ui input" date-placeholder="Input text"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid"&gt;
+	&lt;div class="ui field text border rounded"&gt;
+		&lt;div class="ui label"&gt;Username&lt;/div&gt;&lt;div class="ui input active" date-placeholder="Input text"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<h3 id="select">下拉列表</h3>
+			<p>模拟下来列表，支持边框、圆角等属性</p>
+			<div class="ui field">
+				<div class="ui dropdown">
+					<strong>下拉选项</strong>
+					<ul>
+						<li><a herf="#">test</a></li>
+						<li><a herf="#">test</a></li>
+						<li><a herf="#">test</a></li>
+					</ul>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field"&gt;
+	&lt;div class="ui dropdown"&gt;
+		&lt;strong&gt;下拉选项&lt;/strong&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>带边框的下拉列表</p>
+			<div class="ui field border">
+				<div class="ui dropdown">
+					<strong>下拉选项</strong>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border"&gt;
+	&lt;div class="ui dropdown"&gt;
+		&lt;strong&gt;下拉选项&lt;/strong&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>圆角带边框的下拉列表</p>
+			<div class="ui field border rounded">
+				<div class="ui dropdown">
+					<strong>下拉选项</strong>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field border rounded"&gt;
+	&lt;div class="ui dropdown"&gt;
+		&lt;strong&gt;下拉选项&lt;/strong&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>透明背景下拉列表</p>
+			<div class="ui field transparent">
+				<div class="ui dropdown">
+					<strong>下拉选项</strong>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field transparent"&gt;
+	&lt;div class="ui dropdown"&gt;
+		&lt;strong&gt;下拉选项&lt;/strong&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>带提示文字的下拉列表</p>
+			<div class="ui field text">
+				<div class="ui label">Username</div>
+				<div class="ui dropdown">
+					<strong>下拉选项</strong>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui field text"&gt;
+	&lt;div class="ui label"&gt;Username&lt;/div&gt;
+	&lt;div class="ui dropdown"&gt;
+		&lt;strong&gt;下拉选项&lt;/strong&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<p>提示文字也支持边框和圆角</p>
+			<div class="grid">
+				<div class="ui field text">
+					<div class="ui label">Username</div>
+					<div class="ui dropdown">
+						<strong>下拉选项</strong>
+					</div>
+				</div>
+			</div>
+			<div class="grid">
+				<div class="ui field text border rounded">
+					<div class="ui label">Username</div>
+					<div class="ui dropdown">
+						<strong>下拉选项</strong>
+					</div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="grid"&gt;
+	&lt;div class="ui field text"&gt;
+		&lt;div class="ui label"&gt;Username&lt;/div&gt;
+		&lt;div class="ui dropdown"&gt;
+			&lt;strong&gt;下拉选项&lt;/strong&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid"&gt;
+	&lt;div class="ui field text border rounded"&gt;
+		&lt;div class="ui label"&gt;Username&lt;/div&gt;
+		&lt;div class="ui dropdown"&gt;
+			&lt;strong&gt;下拉选项&lt;/strong&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<h3 id="form">表单</h3>
+			<p>单选多选需要使用<span class="ui tag">label</span>的关联标签激活。</p>
+			<p><div class="ui checkbox"><input type="checkbox" id="checkbox_1" /><label>Username</label></div></p>
+			<p><div class="ui radio"><input type="radio" id="radio_1" checked="checked" /><label>Username</label></div></p>
+			<pre class="prettyprint">
+&lt;div class="ui checkbox"&gt;&lt;input type="checkbox" id="checkbox_1" /&gt;&lt;label&gt;Username&lt;/label&gt;&lt;/div&gt;
+&lt;div class="ui radio"&gt;&lt;input type="radio" id="radio_1" checked="checked" /&gt;&lt;label&gt;Username&lt;/label&gt;&lt;/div&gt;</pre>
+			<h4>切换键</h4>
+			<p>默认样式是仿IOS原生切换，可以增加提示文字</p>
+			<div class="grid">
+				<div class="ui switch">
+					<input type="checkbox" />
+					<div class="ui switch-inner">
+						<div class="ui switch-btn"><span class="active">ON</span><span class="inactive">OFF</span></div>
+						<div class="ui switch-arrow"></div>
+					</div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui switch"&gt;
+	&lt;input type="checkbox" /&gt;
+	&lt;div class="ui switch-inner"&gt;
+		&lt;div class="ui switch-btn"&gt;&lt;span class="active"&gt;ON&lt;/span&gt;&lt;span class="inactive"&gt;OFF&lt;/span&gt;&lt;/div&gt;
+		&lt;div class="ui switch-arrow"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<div class="grid">
+				<div class="ui switch text">
+					<input type="checkbox" />
+					<div class="ui switch-inner">
+						<div class="ui switch-btn"><span class="active">ON</span><span class="inactive">OFF</span></div>
+						<div class="ui switch-arrow"></div>
+					</div>
+				</div>
+			</div>
+			<pre class="prettyprint">
+&lt;div class="ui switch text"&gt;
+	&lt;input type="checkbox" /&gt;
+	&lt;div class="ui switch-inner"&gt;
+		&lt;div class="ui switch-btn"&gt;&lt;span class="active"&gt;ON&lt;/span&gt;&lt;span class="inactive"&gt;OFF&lt;/span&gt;&lt;/div&gt;
+		&lt;div class="ui switch-arrow"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+			<h3 id="custom">自定义组件</h3>
+			<p>待整理</p>
+			<h3 id="responsive">屏幕适配</h3>
+			<p>待整理</p>
+			<h3 id="animate">Animate</h3>
+			<p>待整理</p>
+			<h3 id="font">WebFont</h3>
+			<p class="font-pfdin">1234567890</p>
+			<p class="font-pfdin">abcdefghijklmnopqrstuvwxyz</p>
+			<p class="font-pfdin">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+			<h3 id="question">常见问题整理</h3>
+			<p>目前各种手机配置，浏览器版本不一，在移动端重构中出现很多性能或者兼容性问题，由于兼容性涉及比较多的CSS3样式，且大多是私有化属性，在这里不再列举，仅列出开发中遇到的实际问题。</p>
+			<h4>滚动区域滑动不流畅</h4>
+			<p>IOS下可以增加<span class="ui tag">-webkit-overflow-scrolling:touch;</span>改善问题。</p>
+			<p><span class="ui tag">-webkit-overflow-scrolling</span>为滚动增加了快速滚动和回弹效果，调用的是原生硬件加速，能极大改善卡顿效果。</p>
+			<p>安卓下可以增加3D变换实现硬件加速</p>
+			<pre class="prettyprint">
+-webkit-transform: translate3d(0, 0, 0); 
+-moz-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);</pre>
+		</div>
+	</div>
+</section>
+</body>
+</html>
